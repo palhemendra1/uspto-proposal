@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilot Proposal | AINexForge - Cryptographic Audit Layer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #64748b;
+            --accent: #0ea5e9;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --border: #e2e8f0;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        header {
+            padding: 10rem 5% 6rem;
+            background: radial-gradient(circle at top right, #eff6ff 0%, #ffffff 100%);
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #dbeafe;
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--light);
+        }
+
+        /* Container & Content */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 5%;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-left: 4px solid var(--primary);
+            padding-left: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Dashboard Simulation Component */
+        .demo-box {
+            background: #0f172a;
+            border-radius: 12px;
+            padding: 2rem;
+            color: #94a3b8;
+            font-family: 'JetBrains+Mono', monospace;
+            font-size: 0.9rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow-x: auto;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .line { margin-bottom: 0.5rem; }
+        .blue-text { color: #38bdf8; }
+        .green-text { color: #4ade80; }
+        .gold-text { color: #fbbf24; }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .data-table th {
+            background: var(--light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #94a3b8;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-copy {
+            font-size: 0.875rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* Mobile Menu */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            h1 { font-size: 2.5rem; }
+            .cta-group { flex-direction: column; }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">AINex<span>Forge</span></a>
+        <div class="nav-links">
+            <a href="#summary">Executive Summary</a>
+            <a href="#problem">Problem</a>
+            <a href="#solution">Solution</a>
+            <a href="#architecture">Technical</a>
+            <a href="#contact" class="btn btn-outline" style="padding: 0.4rem 1rem;">Contact CEO</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="badge">Pilot Proposal Submission</div>
+        <h1>Cryptographic Audit Layer for Patent Lifecycle Traceability</h1>
+        <p class="subtitle">A PCT-aligned, non-intrusive infrastructure layer for enhancing transparency and decision intelligence across the international patent lifecycle.</p>
+        <div class="cta-group">
+            <a href="#summary" class="btn btn-primary">Review Proposal</a>
+            <a href="#architecture" class="btn btn-outline">Technical Specs</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Section 1 -->
+        <section id="summary" class="reveal">
+            <h2>1. Executive Summary</h2>
+            <p>AINexForge proposes a <strong>Cryptographic Audit Layer (CAL)</strong> designed to anchor pre-filing and post-filing events using cryptographic hashing. This system improves auditability of submission timelines and document evolution without replacing official USPTO recordation systems. Our goal is to introduce an interoperable infrastructure layer that enhances applicant-side workflow efficiency and compliance readiness.</p>
+        </section>
+
+        <!-- Section 2 & 3 -->
+        <section id="problem" class="reveal">
+            <div class="grid">
+                <div class="card">
+                    <h3>2. The Problem</h3>
+                    <p>Fragmeneted pre-filing documentation trails and limited verifiability of document evolution lead to administrative inefficiencies. There is a critical lack of standardized audit layers across applicant-side systems in the multi-jurisdictional PCT framework.</p>
+                </div>
+                <div class="card">
+                    <h3>3. The Solution</h3>
+                    <p>Our CAL introduces: <strong>Pre-Filing Traceability</strong> (timestamped disclosures), <strong>Filing Event Anchoring</strong> (hash-based verification), and <strong>Post-Filing Monitoring</strong> (lifecycle tracking and intelligent alerts).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Technical Demo -->
+        <section id="architecture" class="reveal">
+            <h2>6. Technical Architecture</h2>
+            <div class="demo-box">
+                <div class="terminal-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+                <div class="line"><span class="blue-text">ainexforge@audit-layer:~$</span> init pilot-protocol --mode sandbox</div>
+                <div class="line">Status: <span class="green-text">Active</span> | Environment: Simulated USPTO Sandbox</div>
+                <div class="line">-----------------------------------------------------</div>
+                <div class="line">Generating Document Fingerprint...</div>
+                <div class="line">Algorithm: <span class="gold-text">SHA-256</span></div>
+                <div class="line">Hash: <span class="green-text">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</span></div>
+                <div class="line">Timestamp: 2026-05-12T14:22:01.004Z</div>
+                <div class="line">Event: <span class="blue-text">PCT_APPLICATION_PRE_FILE_ANCHOR</span></div>
+                <div class="line">-----------------------------------------------------</div>
+                <div class="line"><span class="green-text">✔ Audit entry committed to ledge (Block #84,201)</span></div>
+                <div class="line"><span class="blue-text">ainexforge@audit-layer:~$</span> monitoring --status</div>
+            </div>
+            
+            <div class="grid">
+                <div class="card">
+                    <h4>Hashing Engine</h4>
+                    <p>SHA-256 based document fingerprinting for immutable reference generation.</p>
+                </div>
+                <div class="card">
+                    <h4>Ledger Layer</h4>
+                    <p>Append-only record system ensuring tamper-evident audit logs for all events.</p>
+                </div>
+                <div class="card">
+                    <h4>API Gateway</h4>
+                    <p>Interoperability layer using mock endpoints for non-invasive system integration.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7 -->
+        <section class="reveal">
+            <h2>7. Data Model (Illustrative)</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Description</th>
+                        <th>Sample Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Asset Title</td>
+                        <td>Internal Invention ID</td>
+                        <td>AXF-2026-001</td>
+                    </tr>
+                    <tr>
+                        <td>Filing Timestamp</td>
+                        <td>Internal event log</td>
+                        <td>2026-08-15 09:00 GMT</td>
+                    </tr>
+                    <tr>
+                        <td>Ledger Hash</td>
+                        <td>Cryptographic proof</td>
+                        <td>8f4e2c...d9a1</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>Workflow lifecycle</td>
+                        <td>PHASE_I_PENDING</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 10 -->
+        <section class="reveal" style="background: var(--light); padding: 3rem; border-radius: 12px; border: 1px dashed var(--secondary);">
+            <h2 style="border: none; padding: 0;">10. Risk Mitigation</h2>
+            <p><strong>Strict Compliance:</strong> No claims are made regarding the legal validity of ledger entries. This system operates as a supporting evidentiary tool. No direct integration with USPTO production systems will occur during the pilot phase.</p>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="reveal" style="text-align: center;">
+            <h2>Contact & Submission</h2>
+            <div class="card" style="max-width: 600px; margin: 0 auto;">
+                <p><strong>Hemendra Pal</strong><br>Tech Founder and CEO<br>AINexForge</p>
+                <hr style="margin: 1.5rem 0; opacity: 0.1;">
+                <p>Seeking guidance on alignment with PCT workflows and feedback on pilot scope.</p>
+                <button class="btn btn-primary" style="margin-top: 1.5rem;" onclick="alert('Proposal successfully shared for review.')">Request Technical Advisory</button>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <span class="footer-logo">AINexForge</span>
+        <p>Leading the frontier of Cryptographic IP Audit Layers.<br>Pilot Submission v1.02 - PCT Alignment Strategy.</p>
+        <div class="footer-copy">
+            &copy; 2026 AINexForge. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
